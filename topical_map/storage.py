@@ -8,9 +8,9 @@ from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = PROJECT_ROOT / "data"
-KEYWORDS_PATH = DATA_DIR / "keywords.json"
-SERPS_PATH = DATA_DIR / "serps.json"
+DATABASE_DIR = PROJECT_ROOT / "database"
+KEYWORDS_PATH = DATABASE_DIR / "keyword_list.json"
+SERPS_PATH = DATABASE_DIR / "serps.json"
 
 
 def load_json(path: Path, default: Any) -> Any:

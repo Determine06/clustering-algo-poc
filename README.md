@@ -29,17 +29,16 @@ in the table and omitted from the histogram.
 
 ## Data files
 
-Data is stored in JSON files under `data/`:
+Data is stored in JSON files under `database/`:
 
-* `data/keywords.json` is an array of `{ "keyword", "search_volume" }` records.
-  `search_volume` may be `null`.
-* `data/serps.json` is an array of keyword records with `fetched_at` and ranked
-  `{ "rank", "url", "title" }` results.
+* `database/keyword_list.json` is an array of `{ "keyword", "search_volume" }`
+  records. `search_volume` may be `null`.
+* `database/serps.json` is an array of keyword records with `fetched_at` and
+  ranked `{ "rank", "url", "title" }` results. A missing file is treated as an
+  empty array until SERP collection is implemented.
 
-Both files are initialized to empty arrays. No `tavyn_keywords.json` was found
-when this scaffold was created. If you have one, place it in the project root
-and copy its array contents into `data/keywords.json`. Existing files outside
-the new `data/` directory are left untouched.
+Storage paths are resolved from the project root, so the app works regardless
+of the directory from which Streamlit is launched.
 
 ## Placeholders
 

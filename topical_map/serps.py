@@ -3,7 +3,7 @@
 Intended update behavior:
 
 * Fetch only keywords that do not already have a stored SERP result.
-* Save successful results to ``data/serps.json``.
+* Save successful results to ``database/serps.json``.
 * Leave failed keywords without a successful result so they remain eligible
   for the next run.
 

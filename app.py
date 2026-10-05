@@ -32,8 +32,7 @@ metric_columns[2].metric("SERP coverage", coverage)
 
 if not keywords:
     st.info(
-        "No keywords are available yet. Add records to data/keywords.json, or place "
-        "tavyn_keywords.json in the project root and copy its array into that file."
+        "No keywords are available yet. Add records to database/keyword_list.json."
     )
 else:
     keyword_rows = [
