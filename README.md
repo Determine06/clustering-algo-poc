@@ -4,9 +4,8 @@ A small scaffold for a topical-mapping experiment.
 
 Stage 1 will eventually perform deterministic analysis based on shared organic
 SERP URLs. A later stage may use agents to interpret and name topical groups.
-This repository currently contains the inspection UI, a minimal DataForSEO SERP
-collector, and a placeholder for overlap analysis. No clustering algorithm has
-been chosen.
+This repository contains the inspection UI, a minimal DataForSEO SERP collector,
+and an exploratory shared-URL overlap explorer with deterministic anchor groups.
 
 ## Environment setup
 
@@ -56,8 +55,33 @@ response immediately on the main thread, and skips keywords already present in
 `database/serp_data.json`. Use `--workers 1` for sequential processing. Failed
 keywords remain eligible for the next run.
 
-## Placeholder
+## Overlap explorer
 
-`topical_map/overlap.py` documents the future URL-set comparison, pairwise
-overlap calculation, and weighted NetworkX keyword graph. It does not select
-or implement a clustering algorithm yet.
+Run `streamlit run app.py` to inspect shared URL counts and Jaccard similarity
+in heatmap, relationship-graph, keyword-inspector, and distribution views.
+Keywords without usable saved SERPs are excluded and reported separately. The
+anchor groups are experimental, not validated SEO clusters.
+
+In Relationship Graph, **Minimum shared URLs** (1–10, default 3) controls
+membership. Anchors are chosen by descending volume (missing volumes last,
+alphabetical ties). Provisional groups require direct overlap with the anchor.
+One reassignment pass compares each non-anchor with all fixed anchors and chooses
+the highest Jaccard among qualifying anchors, breaking ties by anchor volume and
+alphabetical order. The **Strongest neighbors** and **All nonzero edges** controls
+only change drawn edges, including relationships across groups.
+
+Colors identify assigned groups; diamonds mark anchors. The group selector shows
+members, their best and second-best qualifying anchors, and descriptive pairwise
+statistics. A Jaccard gap of at most 5 percentage points is marked Ambiguous—an
+exploratory heuristic, not a confidence probability. Singleton statistics are N/A.
+
+**Group view** is the default: each group occupies a labeled area, with its anchor
+in the center. Scroll through the areas; spacing is for readability. Singleton
+groups are hidden by default and can be restored with **Hide singleton groups**.
+Anchor-member links are always drawn. Enable **Show cross-group connections** to
+add actual overlap edges under the existing edge filters.
+
+**Relationship view** retains the spring graph. In either view, selecting a group
+highlights its members and touching edges and opens its member table/statistics;
+**All groups** clears the selection. Full-data summary counts include hidden
+singletons. Display controls do not change assignments.
